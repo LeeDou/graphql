@@ -10784,16 +10784,16 @@ Random.name();
 
 var content = Mock.mock({
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-    'list|5': {
+    'list|5': [{
         // 属性 id 是一个自增数，起始值为 1，每次增 1
         'id|+1': 1,
         'url': '@domain',
         'title': '@title'
-    },
-    'author': {
+    }],
+    'author|5': [{
         'id|+1': 1,
         'name': '@name'
-    }
+    }]
 });
 
 exports.default = content;
@@ -11604,13 +11604,17 @@ console.log(_data2.default);
 
 // 使用 Mock
 console.log(JSON.stringify(_data2.default, null, 2));
-var schema = (0, _graphql.buildSchema)('\t\t\n\t\ttype List {\n\t\t\ttitle :String\n\t\t\turl: String\t\t\t\n\t\t}\t\n\t\ttype Author {\n\t\t\tname : String\n\t\t}\n\t\ttype Query {\n\t\t\tlist : List\n\t\t\tauthor: Author\n\t\t}\t\n\n\t');
+var schema = (0, _graphql.buildSchema)('\t\t\n\t\ttype List {\n\t\t\ttitle :String\n\t\t\turl: String\t\t\t\n\t\t}\t\n\t\ttype Author {\n\t\t\tname : String\n\t\t}\n\t\ttype Query {\n\t\t\tlist : [List]\n\t\t\tauthor: [Author]\n\t\t}\t\n\n\t');
 
 var text = '';
 
 (0, _graphql.graphql)(schema, '{list{title url} author{ name}}', _data2.default).then(function (response) {
 	console.log(response);
-	text = '<h3>' + response.data.list.title + '(' + response.data.list.url + ')' + response.data.author.name + '</h3>';
+	var li = response.data.list;
+	var aut = response.data.author;
+	for (var i = li.length - 1; i >= 0; i--) {
+		text = text + '<h3>' + li[i].title + '(' + li[i].url + ')' + aut[i].name + '</h3>';
+	}
 	document.getElementById('content').innerHTML = text;
 });
 
