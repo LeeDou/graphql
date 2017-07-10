@@ -11634,7 +11634,7 @@ var text = '';
 	var li = response.data.list;
 	var aut = response.data.author;
 	for (var i = li.length - 1; i >= 0; i--) {
-		text = text + '<h3>' + li[i].title + '(' + li[i].url + ')' + aut[i].name + '</h3>';
+		text = text + ('\n\t\t\t<h3>' + li[i].title + ' (' + li[i].url + ') ' + aut[i].name + '\n\t\t');
 	}
 	document.getElementById('content').innerHTML = text;
 });

@@ -28,8 +28,9 @@ graphql(schema,'{list{title url} author{ name}}', root)
 	let li = response.data.list
 	let aut = response.data.author
 	for (let i = li.length-1;i>=0;i--){
-		text =text + '<h3>' + 
-		li[i].title +'(' + li[i].url + ')' + aut[i].name + '</h3>';
+		text = text + `
+			<h3>${li[i].title} (${li[i].url}) ${aut[i].name}
+		`
 	}	 
 	document.getElementById('content').innerHTML = text;
 })
