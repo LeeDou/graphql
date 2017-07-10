@@ -11619,17 +11619,17 @@ var _data2 = _interopRequireDefault(_data);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// app.js
-console.log(content);
 // 输出结果
-
+// app.js
+console.log(JSON.stringify(_data2.default, null, 2));
 // 使用 Mock
-console.log(JSON.stringify(content, null, 2));
+
 var schema = (0, _graphql.buildSchema)('\t\t\n\t\ttype List {\n\t\t\ttitle :String\n\t\t\turl: String\t\t\t\n\t\t}\t\n\t\ttype Author {\n\t\t\tname : String\n\t\t}\n\t\ttype Query {\n\t\t\tlist : [List]\n\t\t\tauthor: [Author]\n\t\t}\t\n\n\t');
+var query = '{\n\tlist {\n\t\ttitle\n\t\turl\n\t}\n\tauthor {\n\t\tname\n\t}\n}';
 
 var text = '';
 
-(0, _graphql.graphql)(schema, '{list{title url} author{ name}}', _data2.default).then(function (response) {
+(0, _graphql.graphql)(schema, query, _data2.default).then(function (response) {
 	console.log(response);
 	var li = response.data.list;
 	var aut = response.data.author;
