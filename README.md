@@ -1,23 +1,20 @@
 # graphql + mockjs 来完成的一个demo
 
 ## 目录结构
- │ app.js                     入口文件 
- │ data.js 
- │ package-lock.json 
- │ package.json 
- │ README.md 
- │ webpack.config.js     
- ├ build 
- │  │ bundle.js               打包后文件   
- │  │ handlebars.js           handlebarjs文件  
- │  └ index.html              主页  
- └ node_modules  
-    ├   
+ │ app.js                     入口文件      
+ │ data.js    
+ │ package-lock.json    
+ │ package.json    
+ │ README.md    
+ │ webpack.config.js        
+ ├ build    
+ │  │ bundle.js               打包后文件      
+ │  │ handlebars.js           handlebarjs文件    
+ │  └ index.html              主页    
+ └ node_modules      
+    ├      
 
- |—— 主目录
- |—— 次目录
-   |- 子目录
-   |- 子目录1
+
 
 ## 所使用到的功能
 - Mockjs来生成模拟数据
