@@ -6,7 +6,9 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
   },
-
+  externals: {
+    handlebars: 'Handlebars'
+  },
   module: {
     loaders: [
     {
@@ -22,11 +24,16 @@ module.exports = {
     	loader: 'url-loader?limit=8192'
     },
    
-
+    
     {
- 		test: /\.css$/,
- 		loader: 'style-loader!css-loader?modules'
-	  }
+ 		  test: /\.css$/,
+ 		  loader: 'style-loader!css-loader?modules'
+	  },
+
+    // {
+    //   test: /\.hbs/,
+    //   loader: 'handlebars-loader'
+    // }
     // {
     //   test: /\.style$/,
     //   loader: 'style!css'

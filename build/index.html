@@ -6,6 +6,27 @@
 </head>
 <body>
 	<div id="content"></div>
+	<hr>
+	<div id="app">
+		<p>加载中</p>
+	</div>
+	<script type="text/tmpl" id="tmpl">
+        <ol>
+           <!--  {{#each rs}}
+            <li>
+                {{title}} abc({{url}})
+                {{data.url}}
+                {{user.name}}
+            </li>
+            {{/each}} -->
+            {{#each list}}
+            <li>
+            	{{title}}({{url}}) {{name}}
+            </li>
+            {{/each}}
+        </ol> 
+    </script>
+    <script src="./handlebars.js"></script>
   	<script src="./bundle.js"></script> 
 </body>
 </html>

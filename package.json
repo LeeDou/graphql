@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fs": "0.0.1-security",
     "graphql": "^0.10.3",
+    "handlebars": "^4.0.10",
     "jquery": "^3.1.1",
     "mockjs": "^1.0.1-beta3",
     "react": "^15.4.2",

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 64);
+/******/ 	return __webpack_require__(__webpack_require__.s = 65);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -86,7 +86,7 @@ Object.defineProperty(exports, 'GraphQLError', {
   }
 });
 
-var _syntaxError = __webpack_require__(67);
+var _syntaxError = __webpack_require__(68);
 
 Object.defineProperty(exports, 'syntaxError', {
   enumerable: true,
@@ -95,7 +95,7 @@ Object.defineProperty(exports, 'syntaxError', {
   }
 });
 
-var _locatedError = __webpack_require__(66);
+var _locatedError = __webpack_require__(67);
 
 Object.defineProperty(exports, 'locatedError', {
   enumerable: true,
@@ -104,7 +104,7 @@ Object.defineProperty(exports, 'locatedError', {
   }
 });
 
-var _formatError = __webpack_require__(65);
+var _formatError = __webpack_require__(66);
 
 Object.defineProperty(exports, 'formatError', {
   enumerable: true,
@@ -7278,7 +7278,7 @@ function formatWarning(error) {
   }
   return formatted.trim();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(87)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(88)))
 
 /***/ }),
 /* 30 */
@@ -10772,7 +10772,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 // data.js
-var Mock = __webpack_require__(86);
+var Mock = __webpack_require__(87);
 var Random = Mock.Random;
 
 Random.paragraph(1);
@@ -10830,7 +10830,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _graphql = __webpack_require__(69);
+var _graphql = __webpack_require__(70);
 
 Object.defineProperty(exports, 'graphql', {
   enumerable: true,
@@ -10839,7 +10839,7 @@ Object.defineProperty(exports, 'graphql', {
   }
 });
 
-var _type = __webpack_require__(74);
+var _type = __webpack_require__(75);
 
 Object.defineProperty(exports, 'GraphQLSchema', {
   enumerable: true,
@@ -11136,7 +11136,7 @@ Object.defineProperty(exports, 'getNamedType', {
   }
 });
 
-var _language = __webpack_require__(70);
+var _language = __webpack_require__(71);
 
 Object.defineProperty(exports, 'Source', {
   enumerable: true,
@@ -11217,7 +11217,7 @@ Object.defineProperty(exports, 'BREAK', {
   }
 });
 
-var _execution = __webpack_require__(68);
+var _execution = __webpack_require__(69);
 
 Object.defineProperty(exports, 'execute', {
   enumerable: true,
@@ -11244,7 +11244,7 @@ Object.defineProperty(exports, 'getDirectiveValues', {
   }
 });
 
-var _subscription = __webpack_require__(71);
+var _subscription = __webpack_require__(72);
 
 Object.defineProperty(exports, 'subscribe', {
   enumerable: true,
@@ -11259,7 +11259,7 @@ Object.defineProperty(exports, 'createSourceEventStream', {
   }
 });
 
-var _validation = __webpack_require__(85);
+var _validation = __webpack_require__(86);
 
 Object.defineProperty(exports, 'validate', {
   enumerable: true,
@@ -11451,7 +11451,7 @@ Object.defineProperty(exports, 'formatError', {
   }
 });
 
-var _utilities = __webpack_require__(81);
+var _utilities = __webpack_require__(82);
 
 Object.defineProperty(exports, 'introspectionQuery', {
   enumerable: true,
@@ -11606,6 +11606,12 @@ Object.defineProperty(exports, 'findDeprecatedUsages', {
 
 /***/ }),
 /* 64 */
+/***/ (function(module, exports) {
+
+module.exports = Handlebars;
+
+/***/ }),
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11619,28 +11625,55 @@ var _data2 = _interopRequireDefault(_data);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// 输出结果
+// 
 // app.js
-console.log(JSON.stringify(_data2.default, null, 2));
+var handlebars = __webpack_require__(64);
+// import $ from 'jquery'
+
+// import  handlebars from 'handlebars' 
 // 使用 Mock
 
-var schema = (0, _graphql.buildSchema)('\t\t\n\t\ttype List {\n\t\t\ttitle :String\n\t\t\turl: String\t\t\t\n\t\t}\t\n\t\ttype Author {\n\t\t\tname : String\n\t\t}\n\t\ttype Query {\n\t\t\tlist : [List]\n\t\t\tauthor: [Author]\n\t\t}\t\n\n\t');
-var query = '{\n\tlist {\n\t\ttitle\n\t\turl\n\t}\n\tauthor {\n\t\tname\n\t}\n}';
+var compile = handlebars.compile;
+
+var template = compile(document.getElementById('tmpl').innerHTML);
+
+// console.log(JSON.stringify(root, null, 2))
+var schema = (0, _graphql.buildSchema)('\t\t\n\t\ttype List {\n\t\t\ttitle :String\n\t\t\turl: String\n\t\t\tid: Int\t\t\t\n\t\t}\t\n\t\ttype Author {\n\t\t\tname : String\n\t\t\tid: Int\n\t\t}\n\t\ttype Query {\n\t\t\tauthor: [Author]\n\t\t\tlist : [List]\n\t\t\t\n\t\t}\t\n\t');
+var query = '{\n\tauthor {\n\t\tname\n\t\tid\n\t}\n\tlist {\n\t\ttitle\n\t\turl\n\t\tid\n\t}\n\t\n}';
 
 var text = '';
 
 (0, _graphql.graphql)(schema, query, _data2.default).then(function (response) {
-	console.log(response);
+	// console.log(response)
+	var rs = [];
+	var obj = {};
 	var li = response.data.list;
 	var aut = response.data.author;
-	for (var i = li.length - 1; i >= 0; i--) {
-		text = text + ('\n\t\t\t<h3>' + li[i].title + ' (' + li[i].url + ') ' + aut[i].name + '\n\t\t');
+	for (var j = 0, le = li.length; j < le; j++) {
+		if (li[j].id === aut[j].id) {
+			obj.url = li[j].url;
+			obj.title = li[j].title;
+			obj.name = aut[j].name;
+			rs.push(obj);
+		} else {
+			rs.push(1);
+		}
 	}
-	document.getElementById('content').innerHTML = text;
+	console.log(rs);
+
+	for (var i = rs.length - 1; i >= 0; i--) {
+		text = text + ('\n\t\t\t<h3>' + rs[i].title + ' (' + rs[i].url + ') ' + rs[i].name + '\n\t\t');
+	}
+	// document.getElementById('content').innerHTML = text;
+	// console.log(rs[0].url);
+	var data = {};
+	data.list = rs;
+	// console.log(data);
+	document.getElementById('app').innerHTML = template(data);
 });
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11679,7 +11712,7 @@ function formatError(error) {
  */
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11717,7 +11750,7 @@ function locatedError(originalError, nodes, path) {
  */
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11771,7 +11804,7 @@ function lpad(len, str) {
 }
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11812,7 +11845,7 @@ Object.defineProperty(exports, 'getDirectiveValues', {
 });
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11898,7 +11931,7 @@ function graphqlImpl(schema, source, rootValue, contextValue, variableValues, op
 }
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12014,7 +12047,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 exports.Kind = Kind;
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12024,7 +12057,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _subscribe = __webpack_require__(73);
+var _subscribe = __webpack_require__(74);
 
 Object.defineProperty(exports, 'subscribe', {
   enumerable: true,
@@ -12040,7 +12073,7 @@ Object.defineProperty(exports, 'createSourceEventStream', {
 });
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12115,7 +12148,7 @@ function iteratorResult(value) {
 }
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12137,7 +12170,7 @@ var _invariant = __webpack_require__(3);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
-var _mapAsyncIterator = __webpack_require__(72);
+var _mapAsyncIterator = __webpack_require__(73);
 
 var _mapAsyncIterator2 = _interopRequireDefault(_mapAsyncIterator);
 
@@ -12239,7 +12272,7 @@ function createSourceEventStream(schema, document, rootValue, contextValue, vari
 }
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12559,7 +12592,7 @@ Object.defineProperty(exports, 'TypeNameMetaFieldDef', {
 });
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12874,7 +12907,7 @@ function cannotExecuteClientSchema() {
 }
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12914,7 +12947,7 @@ function concatAST(asts) {
  */
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13454,7 +13487,7 @@ function cannotExecuteExtendedSchema() {
 }
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13896,7 +13929,7 @@ function findInterfacesRemovedFromObjectTypes(oldSchema, newSchema) {
 }
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13961,7 +13994,7 @@ function findDeprecatedUsages(schema, ast) {
  */
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14009,7 +14042,7 @@ function getOperationAST(documentAST, operationName) {
  */
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14019,7 +14052,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _introspectionQuery = __webpack_require__(82);
+var _introspectionQuery = __webpack_require__(83);
 
 Object.defineProperty(exports, 'introspectionQuery', {
   enumerable: true,
@@ -14028,7 +14061,7 @@ Object.defineProperty(exports, 'introspectionQuery', {
   }
 });
 
-var _getOperationAST = __webpack_require__(80);
+var _getOperationAST = __webpack_require__(81);
 
 Object.defineProperty(exports, 'getOperationAST', {
   enumerable: true,
@@ -14037,7 +14070,7 @@ Object.defineProperty(exports, 'getOperationAST', {
   }
 });
 
-var _buildClientSchema = __webpack_require__(75);
+var _buildClientSchema = __webpack_require__(76);
 
 Object.defineProperty(exports, 'buildClientSchema', {
   enumerable: true,
@@ -14061,7 +14094,7 @@ Object.defineProperty(exports, 'buildSchema', {
   }
 });
 
-var _extendSchema = __webpack_require__(77);
+var _extendSchema = __webpack_require__(78);
 
 Object.defineProperty(exports, 'extendSchema', {
   enumerable: true,
@@ -14070,7 +14103,7 @@ Object.defineProperty(exports, 'extendSchema', {
   }
 });
 
-var _schemaPrinter = __webpack_require__(83);
+var _schemaPrinter = __webpack_require__(84);
 
 Object.defineProperty(exports, 'printSchema', {
   enumerable: true,
@@ -14145,7 +14178,7 @@ Object.defineProperty(exports, 'isValidLiteralValue', {
   }
 });
 
-var _concatAST = __webpack_require__(76);
+var _concatAST = __webpack_require__(77);
 
 Object.defineProperty(exports, 'concatAST', {
   enumerable: true,
@@ -14154,7 +14187,7 @@ Object.defineProperty(exports, 'concatAST', {
   }
 });
 
-var _separateOperations = __webpack_require__(84);
+var _separateOperations = __webpack_require__(85);
 
 Object.defineProperty(exports, 'separateOperations', {
   enumerable: true,
@@ -14193,7 +14226,7 @@ Object.defineProperty(exports, 'assertValidName', {
   }
 });
 
-var _findBreakingChanges = __webpack_require__(78);
+var _findBreakingChanges = __webpack_require__(79);
 
 Object.defineProperty(exports, 'BreakingChangeType', {
   enumerable: true,
@@ -14214,7 +14247,7 @@ Object.defineProperty(exports, 'findBreakingChanges', {
   }
 });
 
-var _findDeprecatedUsages = __webpack_require__(79);
+var _findDeprecatedUsages = __webpack_require__(80);
 
 Object.defineProperty(exports, 'findDeprecatedUsages', {
   enumerable: true,
@@ -14224,7 +14257,7 @@ Object.defineProperty(exports, 'findDeprecatedUsages', {
 });
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14244,7 +14277,7 @@ var introspectionQuery = exports.introspectionQuery = '\n  query IntrospectionQu
  */
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14534,7 +14567,7 @@ function breakLine(line, len) {
 }
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14635,7 +14668,7 @@ function collectTransitiveDependencies(collected, depGraph, fromName) {
 }
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14904,7 +14937,7 @@ Object.defineProperty(exports, 'VariablesInAllowedPositionRule', {
 });
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -23448,7 +23481,7 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
