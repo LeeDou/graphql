@@ -14,6 +14,11 @@
  └ node_modules  
     ├   
 
+ |—— 主目录
+ |—— 次目录
+   |- 子目录
+   |- 子目录1
+
 ## 所使用到的功能
 - Mockjs来生成模拟数据
 - 使用graphql 时通过生成schema，query，root数据三个参数来完成grapql函数的调用
